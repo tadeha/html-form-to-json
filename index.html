@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Convert HTML Form to JSON</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+</head>
+
+<body>
+<h1>Convert HTML Form to JSON</h1>
+<h5>Developed by Tadeh Alexani</h5>
+<form class="cf" onSubmit="return make_json(this);">
+  <input type="text" id="input-name" placeholder="Name" name="name">
+  <input type="email" id="input-email" placeholder="Email address" name="email">
+  <input type="text" id="input-subject" placeholder="Subject" name="subject">
+  <textarea name="msg" type="text" id="input-message" placeholder="Message"></textarea>
+  <input type="submit" value="Submit" id="input-submit">
+</form>
+<pre id="output">
+	Created JSON will shown here..
+</pre>
+<script>
+	function make_json(form){
+		var json = {
+			"name": form.name.value,
+			"email": form.email.value,
+			"subject": form.subject.value,
+			"message": form.msg.value,
+		};
+	var html = JSON.stringify(json, 0,4);
+		
+	document.getElementById('output').innerHTML = html;
+	
+	$.post('data.php',{'json':html} );
+		
+	return false
+	}
+	</script>
+</body>
+</html>
